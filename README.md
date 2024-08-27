@@ -2,7 +2,7 @@
 
 Clone the repo::
 ------------------------------------------
-git clone https://github.com/BJ-331/city-hostel.git
+      git clone https://github.com/BJ-331/city-hostel.git
 ------------------------------------------
 
 client command:
