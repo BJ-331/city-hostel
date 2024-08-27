@@ -5,29 +5,29 @@ Clone the repo::
 git clone https://github.com/BJ-331/city-hostel.git
 ------------------------------------------
 
-      client command:
-      To run frontend
+client command:
+To run frontend
 ====================================
-cd client:
+      cd client:
 ----------------
-npm i
+      npm i
 this command will install all the dependancy used in the front-end 
 
-npm run dev
+      npm run dev
 this command will start the front-end
 -----------------
 
 
-      server command:
-      To run backend
+server command:
+To run backend
 ====================================
 
 
-cd server:
+      cd server:
 ----------------
-npm i
+      npm i
 this command will install all the dependancy used in the backend 
 
-npm run dev
+      npm run dev
 this command will start the back-end
 ------------------
