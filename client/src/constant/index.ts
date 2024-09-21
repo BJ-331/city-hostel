@@ -1,5 +1,6 @@
 export { HeaderIconPath } from "./paths/headerIcon-path";
 export { default as HeaderPath } from "./paths/headerPath";
+export { ProfileSideBar } from "./paths/profile-sidebar";
 export type { default as StyleProps } from "./style-props/styleProps";
 export { Sizes } from "./style-props/sizes";
 export { RoomData } from "./data/room-data";
@@ -12,7 +13,6 @@ export {
   Room_URL,
   USER_URL,
   Auth_URL,
-  REACT_APP_PUBLIC_FOLDER,
   upload_Cloud_URL,
 } from "./url/url";
 export type { errorTypes } from "./interface/errorInterface";
