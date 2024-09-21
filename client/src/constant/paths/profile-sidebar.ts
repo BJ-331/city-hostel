@@ -29,6 +29,7 @@ export const StudenSideBar = [
   {
     id: 2,
     path: "/profile/your-booking",
+    icon: "material-symbols-light:settings-outline",
     title: "Your Booking",
   },
 ];
