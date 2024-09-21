@@ -67,7 +67,7 @@ export const YourBooking = memo(() => {
 
   if (isLoading || deleteLoading) return <LoaderSpinner />;
 
-  if (yourBookingDetails && yourBookingDetails?.length < 0)
+  if (yourBookingDetails && yourBookingDetails?.length <= 0)
     return <div>You have not book any hostel yet.</div>;
 
   return (
