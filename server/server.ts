@@ -7,34 +7,40 @@ import {
   UserRoute,
   RoomRoute,
   CloudeRoute,
+  Payment,
 } from "./routes/";
 
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 const app = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
+const uri = process.env.MONGO_DB_URI ?? "";
+
 mongoose
-  .connect(
-    "mongodb+srv://bijay69:bj89682466@cluster0.f4s7u.mongodb.net/city-hostel?retryWrites=true&w=majority"
-  )
+  .connect(uri)
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log("Connected to Database");
   })
   .catch((error) => {
     console.error("MongoDB connection error:", error);
   });
+
+app.get("/", (req, res) => {
+  res.status(200).send(`<h1>Welcome to city-hostel server</h1>`);
+});
 
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
 app.use("/book", BookingRoute);
 app.use("/room", RoomRoute);
 app.use("/cloudinary", CloudeRoute);
-
-app.use(express.static("public"));
-app.use("/pics", express.static("pics"));
+app.use("/payment", Payment);
 
 app.use(Logger);
 
