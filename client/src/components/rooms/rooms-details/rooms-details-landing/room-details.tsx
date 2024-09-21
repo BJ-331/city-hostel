@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Columns, Mail, Map, Phone, User } from "react-feather";
 import {
   BreadCrumbLayout,
@@ -16,12 +16,27 @@ import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { user } from "../../../../state-management/local/auth";
 import classnames from "classnames";
+import { useGetBookingByIdQuery } from "../../../../state-management/api/booking-api";
+
+interface bookingType {
+  user: {
+    _id: string;
+  };
+}
 
 export const RoomDetailsLayout = React.memo(() => {
   const { id } = useParams();
 
   const { data, isLoading } = useGetHostelByIdQuery(id);
+  const { data: bookingDetails, isLoading: bookingLoading } =
+    useGetBookingByIdQuery(id);
   const userInfo = useSelector(user);
+
+  const alreadyBooked = useMemo(() => {
+    return bookingDetails?.data.filter(
+      (details: bookingType) => details?.user._id === userInfo?._id
+    );
+  }, [bookingDetails?.data, userInfo?._id]);
 
   const nav = useNavigate();
 
@@ -36,7 +51,7 @@ export const RoomDetailsLayout = React.memo(() => {
         </BreadCrumbs>
       </header>
 
-      {isLoading ? (
+      {isLoading || bookingLoading ? (
         <LoaderSpinner />
       ) : (
         <section className="flex flex-col gap-8">
@@ -53,13 +68,17 @@ export const RoomDetailsLayout = React.memo(() => {
                     Booking Details
                   </Button>
 
-                   <Button
+                  <Button
                     className="w-[80%]"
                     onClick={() => nav(`/edit-room/${data?.data._id}`)}
                   >
                     Edit Room
                   </Button>
                 </div>
+              ) : alreadyBooked && alreadyBooked.length > 0 ? (
+                <Button onClick={() => nav("/profile/your-booking")}>
+                  See Details
+                </Button>
               ) : (
                 <RoomBookingDetails
                   frequency={data?.data.frequency}
@@ -82,6 +101,7 @@ export const RoomDetailsLayout = React.memo(() => {
             title={data?.data?.title}
             className={classnames("-mt-40", {
               "mt-0": data?.data.ownerEmail === userInfo?.email,
+              "mt-4": alreadyBooked && alreadyBooked.length > 0,
             })}
           />
           <div className="flex gap-10 place-items-center">
