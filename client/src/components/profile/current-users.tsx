@@ -43,7 +43,9 @@ export const CurrentUsers = memo(() => {
   const ownerHosteBookingDetails = useMemo(() => {
     if (data) {
       return data?.data.filter(
-        (booking: bookingTypes) => booking.room.ownerEmail === userInfo?.email
+        (booking: bookingTypes) =>
+          booking.room.ownerEmail === userInfo?.email &&
+          booking.status === "confirmed"
       );
     }
   }, [data, userInfo?.email]);
