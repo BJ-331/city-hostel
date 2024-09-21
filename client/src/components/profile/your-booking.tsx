@@ -7,16 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 interface bookingTypes {
   user: {
-    email: string;
-    contact: string;
-    userName: string;
-    address: string;
     _id: string;
   };
   _id: string;
   paymentStatus: string;
-  createdAt: string;
   checkInDate: string;
+  status: string;
   room: {
     ownerEmail: string;
     hostelName: string;
@@ -33,7 +29,6 @@ export const YourBooking = memo(() => {
 
   const userInfo = useSelector(user);
   const nav = useNavigate();
-  console.log(userInfo);
 
   const yourBookingDetails = useMemo(() => {
     if (data) {
@@ -61,6 +56,7 @@ export const YourBooking = memo(() => {
             <td className="py-4 border text-center  p-4">Price</td>
             <td className="py-4 border text-center  p-4">Booked Date</td>
             <td className="py-4 border text-center  p-4">Payment</td>
+            <td className="py-4 border text-center  p-4">Status</td>
             <td className="py-4 border text-center  p-4">Action</td>
           </tr>
         </thead>
@@ -92,6 +88,9 @@ export const YourBooking = memo(() => {
 
               <td className="py-4 border text-center  p-4">
                 {detail.paymentStatus}
+              </td>
+              <td className="py-4 border text-center cursor-pointer  p-4">
+                {detail.status}
               </td>
               <td className="py-4 border text-center  p-4">
                 <div className="flex flex-col gap-4  ">
