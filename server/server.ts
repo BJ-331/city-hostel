@@ -20,7 +20,8 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-const uri = process.env.MONGO_DB_URI ?? "";
+const uri =
+  "mongodb+srv://bijay69:bj89682466@cluster0.f4s7u.mongodb.net/city-hostel?retryWrites=true&w=majority";
 
 mongoose
   .connect(uri)
