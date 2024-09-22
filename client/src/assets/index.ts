@@ -8,3 +8,4 @@ export { default as roomLeft } from "./images/room-left.webp";
 export { default as roomMiddle1 } from "./images/room-middle-1.webp";
 export { default as roomMiddle2 } from "./images/room-middle-2.webp";
 export { default as roomRight } from "./images/room-right.webp";
+export { default as logo } from "./images/logo.png";
