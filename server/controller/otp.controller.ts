@@ -17,7 +17,7 @@ export const SendOtp = async (
       contact: data.contact,
       address: data.address,
       _id: data._id,
-      otp: data.otp,
+      otp: otp.toString(),
     };
 
     const emailBody = ` <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
