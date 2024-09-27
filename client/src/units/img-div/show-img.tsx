@@ -2,7 +2,7 @@ import React from "react";
 
 interface showImgPropTypes {
   img: string;
-  height: string;
+  height?: string;
   classname?: string;
   width?: string;
 }
@@ -14,7 +14,7 @@ export const ShowImg = React.memo(
         style={{
           backgroundImage: `url(${img})`,
           width: width,
-          height: height,
+          height: 550,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
