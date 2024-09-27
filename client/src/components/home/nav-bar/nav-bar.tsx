@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { companyLogo } from "../../../assets";
+import { logo } from "../../../assets";
 import { HeaderPath } from "../../../constant";
 import { Button, Guider, Icon, InfoText } from "../../../units";
 import { useAuthContext, useOutsideClick } from "../../../hooks";
@@ -25,12 +25,7 @@ export const NavBar = React.memo(() => {
     <main>
       <nav className="flex justify-between place-items-center bg-bg-brand p-4">
         <section id="left-side">
-          <img
-            src={companyLogo}
-            alt="logo"
-            width={70}
-            onClick={() => nav("/")}
-          />
+          <img src={logo} alt="logo" width={70} onClick={() => nav("/")} />
         </section>
 
         <section
