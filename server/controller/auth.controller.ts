@@ -6,8 +6,6 @@ import CustomError from "../middleware/CusomError";
 import jwt from "jsonwebtoken";
 import { user } from "../types";
 
-const otpToSend = GenerateOtp().toString();
-
 interface customRequest extends Request {
   user?: user;
 }
@@ -35,13 +33,15 @@ export const createUser = async (
           password: hashedPwd,
         };
 
+        const otpToSend = GenerateOtp().toString();
+
         const emailBody = ` <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
           <h2 style="color: #4CAF50; text-align: center;">Your OTP Code</h2>
           <p style="font-size: 16px; color: #333;">Hi <strong>${userDetails.userName}</strong>,</p>
           <p style="font-size: 16px; color: #333;">Use the following OTP (One Time Password) to complete your sign-in process. This OTP is valid for the next 10 minutes.</p>
           
           <div style="text-align: center; margin: 20px 0;">
-            <p style="font-size: 24px; font-weight: bold; color: #000;">123456</p> ${otpToSend}
+            <p style="font-size: 24px; font-weight: bold; color: #000;"> ${otpToSend}</p>
           </div>
           
           <p style="font-size: 16px; color: #333;">If you did not request this, please ignore this email or contact support.</p>
@@ -92,24 +92,29 @@ export const verifyOTP = async (
     if (!otp) {
       return CustomError.entityPropsMissingError(next);
     }
-    if (otp === user?.otp) {
-      const userExists = await UserModel.findOne({
-        where: {
-          _id: user?._id,
-        },
-      });
+    if (otp.otp === user?.otp) {
+      const userExists = await UserModel.findById(user?._id);
       if (!userExists) {
         return CustomError.searchEntityMissingError(next);
       }
+
       const updateValue = {
-        ...userExists,
+        userName: userExists.userName,
+        email: userExists.email,
+        contact: userExists.contact,
+        address: userExists.address,
+        password: userExists.password,
+        role: userExists.role,
         isVerify: true,
       };
-      await userExists.updateOne(updateValue);
-      res.status(200).json({ msg: "verified!!!" });
+
+      await UserModel.findByIdAndUpdate(user?._id, updateValue);
+
+      return res.status(200).json({ msg: "verified!!!" });
     }
     return CustomError.invalidField(next);
   } catch (error) {
+    console.log(error);
     return CustomError.tryCatchError(next);
   }
 };
@@ -126,17 +131,21 @@ export const logIn = async (
         email: userDetails.email,
       });
 
-      console.log(userExists);
       if (!userExists) {
         return CustomError.searchEntityMissingError(next);
       }
       const hashedPwd = await bcrypt.compare(
         userDetails.password,
-        userExists.password
+        userExists?.password ?? ""
       );
       if (!hashedPwd) {
         return CustomError.invalidField(next);
       }
+
+      if (!userExists.isVerify) {
+        return CustomError.notVerify(next);
+      }
+
       const token = generateToken(userExists);
       const decode = jwt.verify(token, "SecretKey");
 
