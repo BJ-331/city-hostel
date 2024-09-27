@@ -8,6 +8,7 @@ import {
   RoomRoute,
   CloudeRoute,
   Payment,
+  otp,
 } from "./routes/";
 
 import mongoose from "mongoose";
@@ -20,8 +21,7 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-const uri =
-  "mongodb+srv://bijay69:bj89682466@cluster0.f4s7u.mongodb.net/city-hostel?retryWrites=true&w=majority";
+const uri = process.env.MONGO_DB_URI ?? "";
 
 mongoose
   .connect(uri)
@@ -40,6 +40,7 @@ app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
 app.use("/book", BookingRoute);
 app.use("/room", RoomRoute);
+app.use("/otp", otp);
 app.use("/cloudinary", CloudeRoute);
 app.use("/payment", Payment);
 
