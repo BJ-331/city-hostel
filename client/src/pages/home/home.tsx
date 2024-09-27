@@ -26,7 +26,7 @@ export const Home = React.memo(() => {
     <div>
       <main
         className={classNames("flex flex-col", {
-          "blur-2xl  fixed": bookingContext?.authModalStatus,
+          "blur-2xl  fixed": bookingContext?.authModalStatus.loginMenu,
         })}
       >
         <HomeSection />
@@ -35,7 +35,7 @@ export const Home = React.memo(() => {
         <Footer />
       </main>
 
-      {bookingContext?.authModalStatus && (
+      {bookingContext?.authModalStatus.loginMenu && (
         <Modal
           classname="bg-other-white-100 p-3 animate-glow z-50 "
           ref={bookingRef}
