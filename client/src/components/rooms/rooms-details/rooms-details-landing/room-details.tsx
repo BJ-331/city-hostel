@@ -15,7 +15,6 @@ import { useGetHostelByIdQuery } from "../../../../state-management/api/hostel-a
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { user } from "../../../../state-management/local/auth";
-import classnames from "classnames";
 import { useGetBookingByIdQuery } from "../../../../state-management/api/booking-api";
 
 interface bookingType {
@@ -110,6 +109,7 @@ export const RoomDetailsLayout = React.memo(() => {
                   location={data?.data.location}
                   peopleNumber={data?.data.peopleNumber}
                   title={data?.data.title}
+                  ownerEmail={data?.data.ownerEmail}
                   totalbed={data?.data.totalbed}
                 />
               )}
