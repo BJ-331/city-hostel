@@ -14,7 +14,7 @@ export const ShowImg = React.memo(
         style={{
           backgroundImage: `url(${img})`,
           width: width,
-          height: 550,
+          height: height,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
