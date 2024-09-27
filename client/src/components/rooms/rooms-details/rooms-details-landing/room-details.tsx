@@ -58,7 +58,7 @@ export const RoomDetailsLayout = React.memo(() => {
           <HeaderInfoText title={data?.data?.hostelName} />
           <div className="flex justify-around">
             <div className="flex flex-col gap-8">
-              <ShowImg img={data?.data.imgUrl} width="850px" />
+              <ShowImg img={data?.data.imgUrl} width="850px" height="550px" />
               <HeaderInfoText title={data?.data?.title} />
               <div className="flex gap-10 place-items-center">
                 <IconWithText icon={Mail} text={`${data?.data.email}`} />
