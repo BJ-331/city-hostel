@@ -11,13 +11,13 @@ export const BookingNotification = (
   peopleNumber: number,
   price: string
 ) => {
-  const emailBody = ` <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+  const emailBody = ` <div style="font-family: Arial, sans-serif; max-width: 600px;  padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
           <h2 style="color: #4CAF50; text-align: center;">New Room Booking Notification</h2>
           <p style="font-size: 16px; color: #333;">Hi <strong>${admin}</strong>,</p>
           <p style="font-size: 16px; color: #333;">New user  with the name ${username} has just schedule booking to the following room</p>
           
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <img src={${img}} alt={room.hostelName} style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }} />
+          <img src=${img} alt={room.hostelName} style={{ maxWidth: '60%', height: 'auto', borderRadius: '8px' }} />
         </div>
         
         <h2 style={{ color: '#2c3e50', marginBottom: '20px' }}>Booking Details:</h2>
