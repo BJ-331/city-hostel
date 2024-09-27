@@ -28,6 +28,7 @@ interface bookingPropTypes {
   title: string;
   totalbed: number;
   _id: string;
+  ownerEmail?: string;
 }
 
 export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
@@ -82,6 +83,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
       checkInDate: localInputFieldValue.dateValue,
       otp: localInputFieldValue.otp,
       people: localInputFieldValue.people,
+      ownerEmail: data.ownerEmail,
     };
 
     await bookHostel(bookingDetails).then((data) => {
