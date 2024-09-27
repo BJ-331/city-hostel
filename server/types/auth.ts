@@ -9,6 +9,7 @@ export interface user {
   role: string;
   _id: ObjectId;
   otp?: string;
+  isVerify?: boolean;
 }
 
 export interface updateUser {
