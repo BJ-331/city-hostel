@@ -29,7 +29,7 @@ export const createBooking = async (
       data.room.price
     );
 
-    await sendMail(data.ownerEmail, "Email Verification", body);
+    await sendMail(data.ownerEmail, "Booking Reservation", body);
     return DataFoundMessage(res, saveData, "Entity created successfully!!!");
   } catch (error) {
     return CustomError.tryCatchError(next);
