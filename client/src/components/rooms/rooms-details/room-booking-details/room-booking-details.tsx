@@ -177,7 +177,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
         <section className="flex flex-col gap-3">
           <div className="flex place-items-center gap-4">
             <InfoText title="Available Seat :" />
-            <InfoText title="4" />
+            <InfoText title={data.peopleNumber.toString()} />
           </div>
 
           <InfoText title="Check-in" />
