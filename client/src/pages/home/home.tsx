@@ -16,7 +16,10 @@ export const Home = React.memo(() => {
   const bookingContext = useAuthContext();
 
   const bookingRef = useOutsideClick(() =>
-    bookingContext?.setauthModalStatus(false)
+    bookingContext?.setauthModalStatus({
+      ...bookingContext.authModalStatus,
+      loginMenu: false,
+    })
   );
 
   return (
@@ -41,7 +44,12 @@ export const Home = React.memo(() => {
             name={X}
             className="absolute right-2"
             textColor="#ADADAD"
-            onClick={() => bookingContext?.setauthModalStatus(false)}
+            onClick={() =>
+              bookingContext?.setauthModalStatus({
+                ...bookingContext.authModalStatus,
+                loginMenu: false,
+              })
+            }
           />
           <AuthLayout />
         </Modal>
