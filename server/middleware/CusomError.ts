@@ -18,6 +18,10 @@ class CustomError {
     return throwError("please provide the correct data", 401, next);
   };
 
+  static tryCatchError = (next: NextFunction) => {
+    return throwError("Something went wrong!!!", 400, next);
+  };
+
   static noTokenError = (next: NextFunction) => {
     return throwError(
       "Please signin with your registered account!!!",
