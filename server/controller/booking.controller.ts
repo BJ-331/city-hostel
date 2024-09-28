@@ -1,9 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { DeleteEntity, UpdateEntity } from "../crud-operation/common-crud";
-import { Booking } from "../model";
+import { Booking, RoomModel } from "../model";
 import CustomError from "../middleware/CusomError";
 import { DataFoundMessage } from "../const";
-import { BookingNotification, sendMail } from "../utils";
+import {
+  BookingAccepted,
+  BookingNotification,
+  BookingRejected,
+  sendMail,
+} from "../utils";
 
 export const createBooking = async (
   req: Request,
@@ -36,11 +41,54 @@ export const createBooking = async (
   }
 };
 
-export const updateBooking = (
+export const updateBooking = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  if (req.body.data.label === "cancelled") {
+    const rejectedEmail = BookingRejected(
+      req.body.data.user.userName,
+      req.body.data.room.hostelName,
+      req.body.data.user.email,
+      req.body.data.user.contact,
+      req.body.data.room.email,
+      req.body.data.room.location,
+      req.body.data.room.contact
+    );
+    await sendMail(
+      req.body.data.user.email,
+      "Email Verification",
+      rejectedEmail
+    );
+  }
+
+  if (req.body.data.label === "confirmed") {
+    const accpetedEmail = BookingAccepted(
+      req.body.data.user.userName,
+      req.body.data.room.hostelName,
+      req.body.data.user.email,
+      req.body.data.user.contact,
+      req.body.data.room.email,
+      req.body.data.room.location,
+      req.body.data.room.contact
+    );
+    await sendMail(
+      req.body.data.user.email,
+      "Email Verification",
+      accpetedEmail
+    );
+    const remainingSeat =
+      req.body.data.room.peopleNumber - req.body.data.people;
+
+    const toUpdateData = {
+      ...req.body.data.room,
+      availableSeat: remainingSeat,
+    };
+
+    await RoomModel.findByIdAndUpdate(req.body.data.room._id, toUpdateData);
+  }
+
   UpdateEntity(req, res, next, Booking, () => {
     return req.body.data;
   });
