@@ -54,3 +54,64 @@ export const BookingNotification = (
         `;
   return emailBody;
 };
+
+export const BookingRejected = (
+  username: string,
+  hostelname: string,
+  email: string,
+  contact: string,
+  hostelemail: string,
+  hosteladdress: string,
+  hostelcontact: string
+) => {
+  const emailbody = `
+  <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px', backgroundColor: '#f8f8f8' }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '30px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <h1 style={{ color: '#e74c3c', textAlign: 'center', marginBottom: '20px', fontSize: '24px' }}>Booking Reservation Update</h1>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          Dear ${username},
+        </p>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          We regret to inform you that your booking reservation at <strong>${hostelname}</strong> has been rejected. We understand this may be disappointing, and we sincerely apologize for any inconvenience this may cause.
+        </p>
+        
+        <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+          <h2 style={{ color: '#3498db', fontSize: '18px', marginBottom: '10px' }}>Booking Details:</h2>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>User:</strong> ${username}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Email:</strong> ${email}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Phone:</strong> ${contact}</p>
+        </div>
+        
+        <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+          <h2 style={{ color: '#3498db', fontSize: '18px', marginBottom: '10px' }}>Hostel Information:</h2>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Name:</strong> ${hostelname}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Email:</strong> ${hostelemail}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Address:</strong> ${hosteladdress}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Contact:</strong> ${hostelcontact}</p>
+        </div>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          If you have any questions or would like more information about the rejection, please don't hesitate to contact the hostel directly using the provided contact information.
+        </p>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          We appreciate your interest in ${hostelname} and hope you'll consider us for future bookings.
+        </p>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5' }}>
+          Best regards,<br />
+          The Booking Team
+        </p>
+      </div>
+      
+      <div style={{ textAlign: 'center', marginTop: '20px', color: '#7f8c8d', fontSize: '12px' }}>
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>If you need assistance, please contact ${hostelname} directly.</p>
+      </div>
+    </div>
+  `;
+
+  return emailbody;
+};
