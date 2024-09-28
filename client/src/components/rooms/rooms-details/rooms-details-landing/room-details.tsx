@@ -111,6 +111,9 @@ export const RoomDetailsLayout = React.memo(() => {
                   title={data?.data.title}
                   ownerEmail={data?.data.ownerEmail}
                   totalbed={data?.data.totalbed}
+                  availableSeat={
+                    data?.data?.availableSeat ?? data?.data.peopleNumber
+                  }
                 />
               )}
               <BrandDetails />
