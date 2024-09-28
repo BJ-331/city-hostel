@@ -46,7 +46,7 @@ export const ManageBookings = memo(() => {
       return data?.data.filter(
         (booking: bookingTypes) =>
           booking.room.ownerEmail === userInfo?.email &&
-          booking.status !== "cancelled"
+          booking.status === "pending"
       );
     }
   }, [data, userInfo?.email]);
