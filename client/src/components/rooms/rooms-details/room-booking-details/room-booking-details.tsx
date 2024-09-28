@@ -29,6 +29,7 @@ interface bookingPropTypes {
   totalbed: number;
   _id: string;
   ownerEmail?: string;
+  availableSeat?: number;
 }
 
 export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
@@ -196,7 +197,16 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
             onChange={handleChange}
           />
         </section>
-        <Button onClick={sendOtp}>Verify</Button>
+        <Button
+          onClick={sendOtp}
+          className={`${
+            localInputFieldValue.people > data.peopleNumber
+              ? "cursor-not-allowed pointer-events-none"
+              : ""
+          }`}
+        >
+          Verify
+        </Button>
       </main>
     );
 });
