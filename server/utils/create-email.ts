@@ -1,4 +1,4 @@
-export const BookingNotification = (
+ export const BookingNotification = (
   admin: string,
   username: string,
   img: string,
@@ -114,4 +114,68 @@ export const BookingRejected = (
   `;
 
   return emailbody;
+};
+
+export const BookingAccepted = (
+  username: string,
+  hostelname: string,
+  email: string,
+  contact: string,
+  hostelemail: string,
+  hosteladdress: string,
+  hostelcontact: string
+) => {
+  const emailBody = `<div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto', padding: '20px', backgroundColor: '#f0f8ff' }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '30px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+        <h1 style={{ color: '#2ecc71', textAlign: 'center', marginBottom: '20px', fontSize: '24px' }}>Booking Reservation Confirmed!</h1>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          Dear ${username},
+        </p>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          We are delighted to inform you that your booking reservation at <strong>${hostelname}</strong> has been accepted! We're excited to welcome you and hope you'll have a wonderful stay with us.
+        </p>
+        
+        <div style={{ backgroundColor: '#e8f6f3', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+          <h2 style={{ color: '#16a085', fontSize: '18px', marginBottom: '10px' }}>Your Booking Details:</h2>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Name:</strong> ${username}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Email:</strong> ${email}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Phone:</strong> ${contact}</p>
+        </div>
+        
+        <div style={{ backgroundColor: '#e8f6f3', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+          <h2 style={{ color: '#16a085', fontSize: '18px', marginBottom: '10px' }}>Hostel Information:</h2>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Name:</strong> ${hostelname}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Email:</strong> ${hostelemail}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Address:</strong> ${hosteladdress}</p>
+          <p style={{ margin: '5px 0', color: '#34495e' }}><strong>Contact:</strong> ${hostelcontact}</p>
+        </div>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          If you have any questions or special requests before your arrival, please don't hesitate to contact us using the provided hostel contact information.
+        </p>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginBottom: '20px' }}>
+          We look forward to providing you with a comfortable and enjoyable stay at ${hostelname}.
+        </p>
+        
+        <div style={{ backgroundColor: '#d4efdf', padding: '15px', borderRadius: '8px', marginTop: '30px' }}>
+          <p style={{ color: '#27ae60', textAlign: 'center', margin: 0, fontWeight: 'bold' }}>
+            Thank you for choosing ${hostelname}!
+          </p>
+        </div>
+        
+        <p style={{ color: '#2c3e50', fontSize: '16px', lineHeight: '1.5', marginTop: '20px' }}>
+          Best regards,<br />
+          The {hostel.name} Team
+        </p>
+      </div>
+      
+      <div style={{ textAlign: 'center', marginTop: '20px', color: '#7f8c8d', fontSize: '12px' }}>
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>If you need assistance, please contact ${hostelname} directly at ${hostelcontact}.</p>
+      </div>
+    </div>`;
+  return emailBody;
 };
