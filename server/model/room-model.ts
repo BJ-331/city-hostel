@@ -23,6 +23,9 @@ const roomSchema = new mongoose.Schema({
   peopleNumber: {
     type: Number,
   },
+  availableSeat: {
+    type: Number,
+  },
   totalbed: {
     type: Number,
   },
