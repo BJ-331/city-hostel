@@ -91,6 +91,7 @@ export const RoomAdd = React.memo(() => {
         ...details,
         imgUrl: picsUrl.data?.imgUrl,
         recaptchaToken: captchaValue,
+        availableSeat: details.peopleNumber,
       };
 
       await createHostel(toPost).then((data) => {
@@ -370,8 +371,8 @@ export const RoomAdd = React.memo(() => {
             >
               Cancel
             </button>
-            
-             <button
+
+            <button
               type="submit"
               className={`rounded-md bg-brand px-3 py-2 text-sm text-white font-semibold hover:animate-glow ${
                 !captchaValue ? "cursor-not-allowed" : ""
