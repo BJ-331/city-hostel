@@ -46,7 +46,8 @@ export const updateBooking = async (
   res: Response,
   next: NextFunction
 ) => {
-  if (req.body.data.label === "cancelled") {
+  console.log(req.body);
+  if (req.body.data.status === "cancelled") {
     const rejectedEmail = BookingRejected(
       req.body.data.user.userName,
       req.body.data.room.hostelName,
@@ -56,14 +57,10 @@ export const updateBooking = async (
       req.body.data.room.location,
       req.body.data.room.contact
     );
-    await sendMail(
-      req.body.data.user.email,
-      "Email Verification",
-      rejectedEmail
-    );
+    await sendMail(req.body.data.user.email, "Booking Update", rejectedEmail);
   }
 
-  if (req.body.data.label === "confirmed") {
+  if (req.body.data.status === "confirmed") {
     const accpetedEmail = BookingAccepted(
       req.body.data.user.userName,
       req.body.data.room.hostelName,
@@ -73,11 +70,7 @@ export const updateBooking = async (
       req.body.data.room.location,
       req.body.data.room.contact
     );
-    await sendMail(
-      req.body.data.user.email,
-      "Email Verification",
-      accpetedEmail
-    );
+    await sendMail(req.body.data.user.email, "Booking Update", accpetedEmail);
     const remainingSeat =
       req.body.data.room.peopleNumber - req.body.data.people;
 
